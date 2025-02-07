@@ -1,50 +1,63 @@
-# React + TypeScript + Vite
+# 🚀 KZ Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to the **KZ Frontend Repository**! This project serves as the user interface for the KZ task management application.
 
-Currently, two official plugins are available:
+## 🌟 Features
+- User authentication (Register & Login)
+- Task creation, updating, and deletion
+- Fully responsive UI
+- Modern design with smooth user experience
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## 📥 Clone the Repository
+```bash
+git clone https://github.com/Sandykr29/kz_frontend.git
+cd kz_frontend
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+## 📦 Install Dependencies
+```bash
+npm install
 ```
+
+## 🔧 Environment Variables
+Create a `.env` file in the root directory and add:
+```env
+VITE_API_URL=https://kz-w1l6.onrender.com
+```
+
+## 🚀 Run the Application
+```bash
+npm run dev
+```
+
+## 📌 API Endpoints
+This frontend interacts with the backend API. Check out the full API documentation in the backend repository:
+[Backend Repository](https://github.com/Sandykr29/KZ.git)
+
+## 🔗 Deployment
+- **Frontend:** [Live Here](https://kz-frontend.vercel.app/)
+- **Backend:** [Live Here](https://kz-w1l6.onrender.com)
+
+## 📸 Screenshots
+## 📸 Screenshots
+
+### Login Page  
+![Login Page](screenshots/login.png)
+
+### Registration Page  
+![Registration Page](screenshots/register.png)
+
+### Dashboard  
+![Dashboard](screenshots/dashboard.png)
+
+### Add Task & Edit Task  
+![Add Task](screenshots/add-task.png)  
+![Edit Task](screenshots/edit-task.png)
+
+### Mobile View  
+![Mobile View](screenshots/mobile-view.png)
+
+
+## 👨‍💻 Developer
+👤 **Sandy Kr**  
+GitHub: [@Sandykr29](https://github.com/Sandykr29)
