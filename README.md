@@ -19,12 +19,6 @@ cd kz_frontend
 npm install
 ```
 
-## 🔧 Environment Variables
-Create a `.env` file in the root directory and add:
-```env
-VITE_API_URL=https://kz-w1l6.onrender.com
-```
-
 ## 🚀 Run the Application
 ```bash
 npm run dev
