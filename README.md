@@ -53,6 +53,13 @@ This frontend interacts with the backend API. Check out the full API documentati
 ### Edit Task  
 ![Edit Task](public/screenshots/edit-task.png)
 
+### filter Task
+![Filter Task](public/screenshots/pending-filter.png)
+![Filter Task](public/screenshots/completed-filter.png)
+
+### Search for related text  
+![Search for related text ](public/screenshots/search.png)
+
 ### Mobile View  
 ![Mobile View](public/screenshots/mobile-view.png)
 
