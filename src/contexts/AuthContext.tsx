@@ -2,6 +2,14 @@ import { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "../utils/api";
 
+// interface AuthContextType {
+//   user: string | null;
+//   token: string | null;
+//   login: (token: string, username: string) => void;
+//   logout: () => void;
+// }
+
+// export const AuthContext = createContext<AuthContextType | null>(null);
 interface AuthContextType {
   user: string | null;
   token: string | null;
@@ -9,8 +17,12 @@ interface AuthContextType {
   logout: () => void;
 }
 
-export const AuthContext = createContext<AuthContextType | null>(null);
-
+export const AuthContext = createContext<AuthContextType>({
+  user: null,
+  token: null,
+  login: () => {},
+  logout: () => {},
+});
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<string | null>(localStorage.getItem("user"));
   const [token, setToken] = useState<string | null>(localStorage.getItem("token"));

@@ -9,11 +9,30 @@ interface Task {
   status: "pending" | "completed";
 }
 
-export const TaskContext = createContext(null);
+interface TaskContextType {
+  tasks: Task[];
+  fetchTasks: () => Promise<void>;
+  addTask: (task: Task) => Promise<void>;
+  updateTask: (taskId: string, updatedTask: Partial<Task>) => Promise<void>;
+  deleteTask: (taskId: string) => Promise<void>;
+  sortTasks: (status: string) => Promise<void>;
+  searchTasks: (query: string) => Promise<void>;
+}
+
+export const TaskContext = createContext<TaskContextType>({
+  tasks: [],
+  fetchTasks: async () => {},
+  addTask: async () => {},
+  updateTask: async () => {},
+  deleteTask: async () => {},
+  sortTasks: async () => {},
+  searchTasks: async () => {},
+});
+
 
 export const TaskProvider = ({ children }: { children: React.ReactNode }) => {
   const [tasks, setTasks] = useState<Task[]>([]);
-  const { user, token } = useContext(AuthContext);
+  const { user, token } = useContext(AuthContext)!;
 
   useEffect(() => {
     if (user && token) fetchTasks();
@@ -55,7 +74,7 @@ export const TaskProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
-  const sortTasks = async (status: "completed" | "pending") => {
+  const sortTasks = async (status:string) => {
     try {
       const res = await axios.get(`tasks/tasks?status=${status}`);
       setTasks(res.data);

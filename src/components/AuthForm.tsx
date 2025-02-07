@@ -26,7 +26,8 @@ export default function AuthForm() {
       login(res.data.token, res.data.username);
       setMessage("Successfully logged in!");
     } catch (error) {
-      setMessage(error.response?.data?.message || "An error occurred");
+      const errMsg = (error as any)?.response?.data?.message || "An error occurred";
+      setMessage(errMsg);
     }
   };
 
