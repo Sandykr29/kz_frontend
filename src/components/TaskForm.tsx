@@ -5,7 +5,7 @@ export default function TaskForm({ closeForm }) {
   const { addTask } = useContext(TaskContext);
   const [form, setForm] = useState({ title: "", description: "", status: "pending" });
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     await addTask(form);
     closeForm();
