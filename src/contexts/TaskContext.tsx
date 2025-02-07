@@ -21,7 +21,7 @@ export const TaskProvider = ({ children }: { children: React.ReactNode }) => {
 
   const fetchTasks = async () => {
     try {
-      const res = await axios.get("/tasks/tasks");
+      const res = await axios.get("/tasks");
       setTasks(res.data);
     } catch (error) {
       console.error("Error fetching tasks:", error);
@@ -30,16 +30,43 @@ export const TaskProvider = ({ children }: { children: React.ReactNode }) => {
 
   const addTask = async (task: Task) => {
     try {
-      const res = await axios.post("/tasks/tasks", task);
+      const res = await axios.post("/tasks", task);
       setTasks([...tasks, res.data]);
     } catch (error) {
       console.error("Error adding task:", error);
     }
   };
 
+  const updateTask = async (taskId: string, updatedTask: Partial<Task>) => {
+    try {
+      const res = await axios.put(`/tasks/${taskId}`, updatedTask);
+      setTasks(tasks.map(task => (task._id === taskId ? res.data : task)));
+    } catch (error) {
+      console.error("Error updating task:", error);
+    }
+  };
+
+  const deleteTask = async (taskId: string) => {
+    try {
+      await axios.delete(`/tasks/${taskId}`);
+      setTasks(tasks.filter(task => task._id !== taskId));
+    } catch (error) {
+      console.error("Error deleting task:", error);
+    }
+  };
+
+  const sortTasks = async (status: "completed" | "pending") => {
+    try {
+      const res = await axios.get(`tasks/tasks?status=${status}`);
+      setTasks(res.data);
+    } catch (error) {
+      console.error("Error sorting tasks:", error);
+    }
+  };
+
   const searchTasks = async (query: string) => {
     try {
-      const res = await axios.get(`/tasks/tasks?search=${query}`);
+      const res = await axios.get(`/tasks?search=${query}`);
       setTasks(res.data);
     } catch (error) {
       console.error("Error searching tasks:", error);
@@ -47,7 +74,7 @@ export const TaskProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <TaskContext.Provider value={{ tasks, fetchTasks, addTask, searchTasks }}>
+    <TaskContext.Provider value={{ tasks, fetchTasks, addTask, updateTask, deleteTask, sortTasks, searchTasks }}>
       {children}
     </TaskContext.Provider>
   );
