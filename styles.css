@@ -1,0 +1,11 @@
+/* ...existing code... */
+
+.completed-task {
+    background-color: green;
+}
+
+.pending-task {
+    background-color: red;
+}
+
+/* ...existing code... */
