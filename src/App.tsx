@@ -1,8 +1,20 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./contexts/AuthContext";
+import { TaskProvider } from "./contexts/TaskContext";
+import Dashboard from "./pages/Dashboard";
+import AuthForm from "./components/AuthForm";
 
-const App = () => {
+export default function App() {
   return (
-    <div className="text-3xl font-bold underline text-center text-rose-500">App</div>
-  )
+    <Router>
+      <AuthProvider>
+        <TaskProvider>
+          <Routes>
+            <Route path="/" element={<AuthForm />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+          </Routes>
+        </TaskProvider>
+      </AuthProvider>
+    </Router>
+  );
 }
-
-export default App
