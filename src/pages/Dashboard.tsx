@@ -8,12 +8,13 @@ export default function Dashboard() {
   const { tasks, sortTasks, updateTask, deleteTask, fetchTasks } = useContext(TaskContext);
   const [showTaskForm, setShowTaskForm] = useState(false);
 
-  const handleSortChange = (e:React.ChangeEvent<HTMLSelectElement>) => {
+  const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const status = e.target.value;
+
     if (status === "all") {
       fetchTasks();
     } else {
-      sortTasks(status);
+      sortTasks(status === "completed"); // ✅ Convert to boolean
     }
   };
 
@@ -35,7 +36,6 @@ export default function Dashboard() {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {tasks?.map((task) => (
-          
           <TaskCard key={task._id} task={task} updateTask={updateTask} deleteTask={deleteTask} />
         ))}
       </div>

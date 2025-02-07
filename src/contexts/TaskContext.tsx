@@ -6,17 +6,16 @@ interface Task {
   _id: string;
   title: string;
   description: string;
-  // status: "pending" | "completed";
-  completed: boolean;
+  completed: boolean; // ✅ Fixed boolean type
 }
 
 interface TaskContextType {
   tasks: Task[];
   fetchTasks: () => Promise<void>;
-  addTask: (task: Task) => Promise<void>;
+  addTask: (task: Omit<Task, "_id">) => Promise<void>; // ✅ Accept task without `_id`
   updateTask: (taskId: string, updatedTask: Partial<Task>) => Promise<void>;
   deleteTask: (taskId: string) => Promise<void>;
-  sortTasks: (status: string) => Promise<void>;
+  sortTasks: (completed: boolean) => Promise<void>; // ✅ Sort using `completed`
   searchTasks: (query: string) => Promise<void>;
 }
 
@@ -29,7 +28,6 @@ export const TaskContext = createContext<TaskContextType>({
   sortTasks: async () => {},
   searchTasks: async () => {},
 });
-
 
 export const TaskProvider = ({ children }: { children: React.ReactNode }) => {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -48,10 +46,10 @@ export const TaskProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
-  const addTask = async (task: Task) => {
+  const addTask = async (task: Omit<Task, "_id">) => {
     try {
       const res = await axios.post("tasks/tasks", task);
-      setTasks([...tasks, res.data]);
+      setTasks([...tasks, res.data]); // ✅ `_id` comes from the backend response
     } catch (error) {
       console.error("Error adding task:", error);
     }
@@ -60,7 +58,7 @@ export const TaskProvider = ({ children }: { children: React.ReactNode }) => {
   const updateTask = async (taskId: string, updatedTask: Partial<Task>) => {
     try {
       const res = await axios.put(`tasks/tasks/${taskId}`, updatedTask);
-      setTasks(tasks.map(task => (task._id === taskId ? res.data : task)));
+      setTasks(tasks.map((task) => (task._id === taskId ? res.data : task)));
     } catch (error) {
       console.error("Error updating task:", error);
     }
@@ -69,15 +67,15 @@ export const TaskProvider = ({ children }: { children: React.ReactNode }) => {
   const deleteTask = async (taskId: string) => {
     try {
       await axios.delete(`tasks/tasks/${taskId}`);
-      setTasks(tasks.filter(task => task._id !== taskId));
+      setTasks(tasks.filter((task) => task._id !== taskId));
     } catch (error) {
       console.error("Error deleting task:", error);
     }
   };
 
-  const sortTasks = async (status:string) => {
+  const sortTasks = async (completed: boolean) => {
     try {
-      const res = await axios.get(`tasks/tasks?status=${status}`);
+      const res = await axios.get(`tasks/tasks?status=${completed?"completed":"pending"}`);
       setTasks(res.data);
     } catch (error) {
       console.error("Error sorting tasks:", error);
@@ -94,7 +92,17 @@ export const TaskProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <TaskContext.Provider value={{ tasks, fetchTasks, addTask, updateTask, deleteTask, sortTasks, searchTasks }}>
+    <TaskContext.Provider
+      value={{
+        tasks,
+        fetchTasks,
+        addTask,
+        updateTask,
+        deleteTask,
+        sortTasks,
+        searchTasks,
+      }}
+    >
       {children}
     </TaskContext.Provider>
   );
