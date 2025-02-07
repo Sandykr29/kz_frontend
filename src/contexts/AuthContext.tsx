@@ -2,14 +2,6 @@ import { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "../utils/api";
 
-// interface AuthContextType {
-//   user: string | null;
-//   token: string | null;
-//   login: (token: string, username: string) => void;
-//   logout: () => void;
-// }
-
-// export const AuthContext = createContext<AuthContextType | null>(null);
 interface AuthContextType {
   user: string | null;
   token: string | null;

@@ -1,6 +1,22 @@
 import { useState } from "react";
 
-export default function TaskCard({ task, updateTask, deleteTask }) {
+// Define Task Type
+interface Task {
+  _id: string;
+  title: string;
+  description: string;
+  completed: boolean;
+}
+
+// Define Props Type
+interface TaskCardProps {
+  task: Task;
+  updateTask: (id: string, updatedTask: Partial<Task>) => Promise<void>;
+  deleteTask: (id: string) => Promise<void>;
+}
+
+// Fix TaskCard Function Signature
+export default function TaskCard({ task, updateTask, deleteTask }: TaskCardProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [form, setForm] = useState({
     title: task.title,
@@ -11,7 +27,7 @@ export default function TaskCard({ task, updateTask, deleteTask }) {
   const handleUpdate = async () => {
     const updatedForm = {
       ...form,
-      completed: form.completed === "completed",
+      completed: form.completed,
     };
     await updateTask(task._id, updatedForm);
     setIsEditing(false);
@@ -27,6 +43,7 @@ export default function TaskCard({ task, updateTask, deleteTask }) {
     >
       {isEditing ? (
         <>
+        {/* Edit form  */}
           <input
             type="text"
             value={form.title}
@@ -39,11 +56,12 @@ export default function TaskCard({ task, updateTask, deleteTask }) {
             className="block w-full p-3 border rounded mb-2 shadow-sm focus:ring-2 focus:ring-indigo-400 text-gray-900 bg-gray-100"
           />
           <select
-            value={form.completed}
-            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setForm({ ...form, completed: e.target.value })}
+            value={form.completed ? "completed" : "pending"}
+            onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+              setForm({ ...form, completed: e.target.value === "completed" })
+            }
             className="block w-full p-3 border rounded mb-2 shadow-sm focus:ring-2 focus:ring-indigo-400 text-gray-900 bg-gray-100"
           >
-            <option>--Select--</option>
             <option value="pending">Pending</option>
             <option value="completed">Completed</option>
           </select>
@@ -76,6 +94,8 @@ export default function TaskCard({ task, updateTask, deleteTask }) {
           <p className="text-sm font-medium text-gray-400 italic mt-1">
             Status: <span className="font-semibold">{form.completed ? "✔ Completed" : "⏳ Pending"}</span>
           </p>
+
+          {/* Edit and Delete buttons  */}
           <div className="flex justify-between items-center mt-4">
             <button
               className="bg-purple-500 hover:bg-purple-600 text-white px-5 py-2 rounded-lg border-2 border-purple-600 shadow-md hover:shadow-lg transition-all duration-300"

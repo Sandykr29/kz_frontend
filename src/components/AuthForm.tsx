@@ -20,7 +20,7 @@ export default function AuthForm() {
     const payload = isLogin
       ? { email: form.email, password: form.password }
       : form;
-
+console.log("form submitted", payload);
     try {
       const res = await axios.post(url, payload);
       login(res.data.token, res.data.username);
