@@ -10,7 +10,7 @@ export default function AuthForm() {
 
   const toggleForm = () => {
     setIsLogin(!isLogin);
-    setMessage(null); // Clear message when toggling form
+    setMessage(null); 
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {

@@ -14,7 +14,7 @@ export default function Dashboard() {
     if (status === "all") {
       fetchTasks();
     } else {
-      sortTasks(status === "completed"); // ✅ Convert to boolean
+      sortTasks(status === "completed");
     }
   };
 
