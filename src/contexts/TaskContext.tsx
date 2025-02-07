@@ -13,25 +13,37 @@ export const TaskContext = createContext(null);
 
 export const TaskProvider = ({ children }: { children: React.ReactNode }) => {
   const [tasks, setTasks] = useState<Task[]>([]);
-  const { user } = useContext(AuthContext);
+  const { user, token } = useContext(AuthContext);
 
   useEffect(() => {
-    if (user) fetchTasks();
-  }, [user]);
+    if (user && token) fetchTasks();
+  }, [user, token]);
 
   const fetchTasks = async () => {
-    const res = await axios.get("/tasks");
-    setTasks(res.data);
+    try {
+      const res = await axios.get("/tasks/tasks");
+      setTasks(res.data);
+    } catch (error) {
+      console.error("Error fetching tasks:", error);
+    }
   };
 
   const addTask = async (task: Task) => {
-    const res = await axios.post("/tasks", task);
-    setTasks([...tasks, res.data]);
+    try {
+      const res = await axios.post("/tasks/tasks", task);
+      setTasks([...tasks, res.data]);
+    } catch (error) {
+      console.error("Error adding task:", error);
+    }
   };
 
   const searchTasks = async (query: string) => {
-    const res = await axios.get(`/tasks?search=${query}`);
-    setTasks(res.data);
+    try {
+      const res = await axios.get(`/tasks/tasks?search=${query}`);
+      setTasks(res.data);
+    } catch (error) {
+      console.error("Error searching tasks:", error);
+    }
   };
 
   return (
