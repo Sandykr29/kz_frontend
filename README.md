@@ -38,26 +38,25 @@ This frontend interacts with the backend API. Check out the full API documentati
 - **Frontend:** [Live Here](https://kz-frontend.vercel.app/)
 - **Backend:** [Live Here](https://kz-w1l6.onrender.com)
 
-## 📸 Screenshots
+
 ## 📸 Screenshots
 
 ### Login Page  
-![Login Page](screenshots/login.png)
+![Login Page](public/screenshots/login.png)
 
 ### Registration Page  
-![Registration Page](screenshots/register.png)
+![Registration Page](public/screenshots/register.png)
 
 ### Dashboard  
-![Dashboard](screenshots/dashboard.png)
+![Dashboard](public/screenshots/dashboard.png)
 
-### Add Task & Edit Task  
-![Add Task](screenshots/add-task.png)  
-![Edit Task](screenshots/edit-task.png)
+### Edit Task  
+![Edit Task](public/screenshots/edit-task.png)
 
 ### Mobile View  
-![Mobile View](screenshots/mobile-view.png)
+![Mobile View](public/screenshots/mobile-view.png)
 
 
 ## 👨‍💻 Developer
-👤 **Sandy Kr**  
+👤 **Sandeep Kumar**  
 GitHub: [@Sandykr29](https://github.com/Sandykr29)
