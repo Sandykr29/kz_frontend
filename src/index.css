@@ -1,5 +1,15 @@
 @import "tailwindcss";
 
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Set background for the entire app */
+body {
+  @apply bg-gradient-to-r from-blue-300 via-indigo-300 to-purple-300 text-white;
+}
+
 /* Custom styles for responsiveness */
 @media (max-width: 420px) {
   .header input,

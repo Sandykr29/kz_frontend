@@ -20,7 +20,6 @@ export default function AuthForm() {
     const payload = isLogin
       ? { email: form.email, password: form.password }
       : form;
-console.log("form submitted", payload);
     try {
       const res = await axios.post(url, payload);
       login(res.data.token, res.data.username);
@@ -50,7 +49,7 @@ console.log("form submitted", payload);
         )}
         <input
           type="email"
-          placeholder="Email"
+          placeholder="Email ex: email+1@gmail.com"
           value={form.email}
           className="block w-full p-3 border rounded mb-3 bg-white text-gray-800"
           onChange={(e) => setForm({ ...form, email: e.target.value })}
@@ -58,7 +57,7 @@ console.log("form submitted", payload);
         />
         <input
           type="password"
-          placeholder="Password"
+          placeholder="Password ex: password1"
           value={form.password}
           className="block w-full p-3 border rounded mb-3 bg-white text-gray-800"
           onChange={(e) => setForm({ ...form, password: e.target.value })}
