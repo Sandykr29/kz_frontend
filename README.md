@@ -54,6 +54,9 @@ This frontend interacts with the backend API. Check out the full API documentati
 ### Search for related text  
 ![Search for related text ](public/screenshots/search.png)
 
+### Add Tasks
+![Add Tasks ](public/screenshots/add_task.png)
+
 ### Mobile View  
 ![Mobile View](public/screenshots/mobile-view.png)
 
